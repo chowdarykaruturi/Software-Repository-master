@@ -1,0 +1,43 @@
+﻿<Window x:Class="WpfApp1.ViewFile"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="ViewFile" Height="600" Width="700">
+    <!--
+////////////////////////////////////////////////////////////////////////////////////////
+// ViewFile.xaml    - Pops up to show the content of file                             //
+// ver 1.0                                                                            //
+//                                                                                    //
+//Language     : C++                                                                  //
+// Platform    : Lenovo 510S Ideapad, Win Pro 10, Visual Studio 2017                  //
+// Application : CSE-687 OOD Project 4                                                //
+// Author      : Akhil Karuturi,Syracuse University                        //
+// Source      : Dr. Jim Fawcett, EECS, SU                                            //
+////////////////////////////////////////////////////////////////////////////////////////
+    
+    
+      Purpose:
+    This xaml is used to display contents of the file.
+  
+   Required Files:
+     ViewFile.xaml, ViewFile.xaml.cs
+    
+  
+   Maintenance History:
+     ver 1.0 
+     - first release
+    -->
+
+    <Grid Margin="10">
+        <FlowDocumentScrollViewer Grid.Row="6" BorderThickness="1" BorderBrush="Black">
+            <FlowDocument Name="codeview" FontFamily="Consolas" FontSize="12">
+                <Paragraph Name="main">
+                   
+                </Paragraph>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+    </Grid>
+</Window>

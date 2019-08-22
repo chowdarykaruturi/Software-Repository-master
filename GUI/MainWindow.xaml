@@ -1,0 +1,451 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="Project #4" Height="600" Width="700" Padding="20" FontFamily="tahoma" Background="#ccc" Loaded="Window_Loaded">
+    <!-- 
+////////////////////////////////////////////////////////////////////////////////////////
+// MainWindow.xaml - GUI for the Client                                               //
+// ver 1.0                                                                            //
+//                                                                                    //
+//Language     : C++                                                                  //
+// Platform    : Lenovo 510S Ideapad, Win Pro 10, Visual Studio 2017                  //
+// Application : CSE-687 OOD Project 4                                                //
+// Author      : Akhil Karuturi,Syracuse University                        //
+// Source      : Dr. Jim Fawcett, EECS, SU                                            //
+////////////////////////////////////////////////////////////////////////////////////////
+    
+ * Purpose: This provides the GUI for the user with tabs for check-in, check-out and browse
+ * Required Files:
+
+ * Mainwindow.xaml, MainWindow.xaml.cs
+ * Maintenance History:
+ * ver 1.0 : 9 Apr 2018
+ * - first release
+    -->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="77*"/>
+            <ColumnDefinition Width="19*"/>
+            <ColumnDefinition Width="135*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TabControl Grid.Row="0" Name="tabCntrl" TabStripPlacement="Top" FontFamily="Tahoma" FontWeight="Medium"  FontSize="12" Grid.ColumnSpan="3" Margin="0,0,0.333,19.667" Grid.RowSpan="2" >
+            <TabItem Name="Connectingtoservers" Header="Connecting to Server">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="175*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="317*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10"></RowDefinition>
+                        <RowDefinition Height="20"></RowDefinition>
+                        <RowDefinition Height="10"></RowDefinition>
+                        <RowDefinition Height="20"></RowDefinition>
+                        <RowDefinition Height="10"></RowDefinition>
+                        <RowDefinition Height="20"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="80"></ColumnDefinition>
+                            <ColumnDefinition Width="10"></ColumnDefinition>
+                            <ColumnDefinition Width="80"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="1" Name="ipaddress" >Ip Address:</TextBlock>
+                        <TextBox Grid.Column="3" Name="enteredipaddress" IsEnabled="True">localhost</TextBox>
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="80"></ColumnDefinition>
+                            <ColumnDefinition Width="10"></ColumnDefinition>
+                            <ColumnDefinition Width="80"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="1" Name="port" >Port:</TextBlock>
+                        <TextBox Grid.Column="3" Name="enteredport" IsEnabled="True">8080</TextBox>
+                    </Grid>
+
+                    <Grid Grid.Row="5">
+                        <Button Width="60" Click="connect_to_server_click">Connect</Button>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Name="CheckIn" Header="Check-in">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10"></RowDefinition>
+                        <RowDefinition Height="20"></RowDefinition>
+                        <RowDefinition Height="10"></RowDefinition>
+                        <RowDefinition Height="20"></RowDefinition>
+                        <RowDefinition Height="10"></RowDefinition>
+                        <RowDefinition Height="20"></RowDefinition>
+                        <RowDefinition Height="10"></RowDefinition>
+                        <RowDefinition Height="20"></RowDefinition>
+                        <RowDefinition Height="10"></RowDefinition>
+                        <RowDefinition Height="20"></RowDefinition>
+                        <RowDefinition Height="10"></RowDefinition>
+                        <RowDefinition Height="200"></RowDefinition>
+                        <RowDefinition Height="20"></RowDefinition>
+                        <RowDefinition Height="16"></RowDefinition>
+                        <RowDefinition Height="20"></RowDefinition>
+                        <RowDefinition Height="20"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10"></ColumnDefinition>
+                            <ColumnDefinition Width="120"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="1"  Name="NameOfFile" >Select file to Check-in:</TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10"></ColumnDefinition>
+                            <ColumnDefinition Width="400"></ColumnDefinition>
+                            <ColumnDefinition Width="10"></ColumnDefinition>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="1" Name="SelectedFile" ></TextBox>
+                        <Button Grid.Column="3" Name="SelectFile" Click="SelectFile_Click">Select</Button>
+                    </Grid>
+                    <Grid Grid.Row="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10"></ColumnDefinition>
+                            <ColumnDefinition Width="160"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="1" Name="Description" IsEnabled="False" >Enter Description of the File</TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="7">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10"></ColumnDefinition>
+                            <ColumnDefinition Width="300"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="1" Name="EnteredDescriptionIs" IsEnabled="True" BorderBrush="Black" ></TextBox>
+                    </Grid>
+                    <Grid Grid.Row="9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10"></ColumnDefinition>
+                            <ColumnDefinition Width="60"></ColumnDefinition>
+                            <ColumnDefinition Width="10"></ColumnDefinition>
+                            <ColumnDefinition Width="80"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="1" Name="Categories">Categories:</TextBlock>
+                        <ComboBox Grid.Column="3">
+                            <ComboBoxItem>
+                                <CheckBox Name="Display" Click="Display_checkbox_clicked">
+                                    <TextBlock Name="DisplayText">Display</TextBlock>
+                                </CheckBox>
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                <CheckBox Name="DbCore" Click="Dbcore_checkbox_clicked">
+                                    <TextBlock Name="DbCoreText">DbCore</TextBlock>
+                                </CheckBox>
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                <CheckBox Name="Comm" Click="Comm_checkbox_clicked">
+                                    <TextBlock Name="CommText">Comm</TextBlock>
+                                </CheckBox>
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                <CheckBox Name="Messaging" Click="Messaging_checkbox_clicked">
+                                    <TextBlock Name="MessagingText">Messaging</TextBlock>
+                                </CheckBox>
+                            </ComboBoxItem>
+                        </ComboBox>
+                    </Grid>
+                    <Grid Grid.Row="11">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20"></ColumnDefinition>
+                            <ColumnDefinition Width="150"></ColumnDefinition>
+                            <ColumnDefinition Width="10"></ColumnDefinition>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                            <ColumnDefinition Width="10"></ColumnDefinition>
+                            <ColumnDefinition Width="150"></ColumnDefinition>
+                            <ColumnDefinition Width="10"></ColumnDefinition>
+                            <ColumnDefinition Width="20"></ColumnDefinition>
+                            <ColumnDefinition Width="10"></ColumnDefinition>
+                            <ColumnDefinition Width="150"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="1">
+                            <ListBox  Name="leftChildrenBox" SelectionMode="Multiple" BorderBrush="Black"></ListBox>
+                        </Grid>
+                        <Grid Grid.Column="3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"></RowDefinition>
+                                <RowDefinition Height="20"></RowDefinition>
+                                <RowDefinition Height="10"></RowDefinition>
+                                <RowDefinition Height="20"></RowDefinition>
+                                <RowDefinition Height="25"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Button Grid.Row="1" Name="addButton" Content="Add Children &gt;&gt;" BorderBrush="Black"   Click="Add_Click"></Button>
+                            <Button Grid.Row="3" Name="removeButton" Content="&lt;&lt; Remove" BorderBrush="Black" Click="Remove_Click"></Button>
+                        </Grid>
+                        <Grid Grid.Column="5">
+                            <ListBox  Name="rightChildrenBox" SelectionMode="Multiple" BorderBrush="Black"></ListBox>
+                        </Grid>
+                        <GridSplitter Grid.Column="7" Grid.RowSpan="3" Height="200" Width="5" VerticalAlignment="Stretch" Background="#666"></GridSplitter>
+                        <Grid Grid.Column="9">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20"></RowDefinition>
+                                <RowDefinition Height="10"></RowDefinition>
+                                <RowDefinition Height="170"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Column="1" Name="Directories" IsEnabled="False" >Select directory to checkIn to</TextBlock>
+                            <ListBox Grid.Row="3" Name="directoriesBox" SelectionMode="Single" BorderBrush="Black"></ListBox>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="13">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10"></ColumnDefinition>
+                            <ColumnDefinition Width="40"></ColumnDefinition>
+                            <ColumnDefinition Width="10"></ColumnDefinition>
+                            <ColumnDefinition Width="17"></ColumnDefinition>
+                            <ColumnDefinition Width="5"></ColumnDefinition>
+                            <ColumnDefinition Width="30"></ColumnDefinition>
+                            <ColumnDefinition Width="10"></ColumnDefinition>
+                            <ColumnDefinition Width="17"></ColumnDefinition>
+                            <ColumnDefinition Width="5"></ColumnDefinition>
+                            <ColumnDefinition Width="40"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="1" Name="Status">Status:</TextBlock>
+                        <CheckBox Grid.Column="3" Name="opencheckbox" Click="opencheckbox_clicked"></CheckBox>
+                        <TextBlock Grid.Column="5" Name="Open">Open</TextBlock>
+                        <CheckBox Grid.Column="7" Name="closecheckbox"  Click="closecheckbox_clicked"></CheckBox>
+                        <TextBlock Grid.Column="9" Name="Closedes">Close</TextBlock>
+
+                    </Grid>
+                    <Grid Grid.Row="15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20"></ColumnDefinition>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="1" Name="Checkin" BorderBrush="Black" Click="Check_in_click">Check-in</Button>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Name="CheckOut" Header="Check-out" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <!-- dirs -->
+                        <RowDefinition Height="5"></RowDefinition>
+                        <!-- gridsplitter-->
+                        <RowDefinition Height="*"></RowDefinition>
+                        <!-- files -->
+                        <RowDefinition Height="10"></RowDefinition>
+                        <RowDefinition Height="100"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Background="#ccc">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <!-- label -->
+                            <RowDefinition Height="30"></RowDefinition>
+                            <!-- textblock -->
+                            <RowDefinition Height="*"></RowDefinition>
+                            <!-- dir list -->
+                            <RowDefinition Height="10"></RowDefinition>
+                            <!-- buttons -->
+                        </Grid.RowDefinitions>
+                        <DockPanel Grid.Row="0">
+                            <TextBlock DockPanel.Dock="Left" Margin="10 0" VerticalAlignment="Center" FontSize="14" FontWeight="Bold">Dirs</TextBlock>
+                        </DockPanel>
+                        <DockPanel Grid.Row="1">
+                            <Label Width="40" Height="30" Margin="10 0 5 0" DockPanel.Dock="Right">Path</Label>
+                            <TextBlock x:Name="PathTextBlock" DockPanel.Dock="Left" Padding="10 0" Margin="12 0" VerticalAlignment="Center" FontSize="14" FontWeight="Normal" Background="#fff">path</TextBlock>
+                        </DockPanel>
+                        <Border Grid.Row="2" BorderThickness="10" Background="#000">
+                            <ListBox x:Name="DirList" MouseDoubleClick="DirList_MouseDoubleClick"></ListBox>
+                        </Border>
+                    </Grid>
+                    <GridSplitter Grid.Row="1" Grid.ColumnSpan="3" Height="5" HorizontalAlignment="Stretch" Background="#666"></GridSplitter>
+                    <Grid Grid.Row="2" Background="#ccc">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <!-- label -->
+                            <RowDefinition Height="*"></RowDefinition>
+                            <!-- file list -->
+                            <RowDefinition Height="10"></RowDefinition>
+                            <!-- buttons -->
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Padding="10 10" FontWeight="Bold" FontSize="14">Files  -Select the File you want to Check-out</TextBlock>
+                        <Border Grid.Row="1" BorderThickness="10" Background="#000">
+                            <ListBox x:Name="FileList" ></ListBox>
+                        </Border>
+                    </Grid>
+                    <Grid Grid.Row="4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="10"></RowDefinition>
+                            <RowDefinition Height="20"></RowDefinition>
+                            <RowDefinition Height="10"></RowDefinition>
+                            <RowDefinition Height="20"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Label Name="checkouttext" Margin="10 0">Specify the Path you want to check-out the file to:</Label>
+                        </Grid>
+                        <DockPanel Grid.Row="2">
+                            <Button Width="80" Height="20" Margin="10 0" DockPanel.Dock="Right" Click="get_Check_out_path">Checkout path</Button>
+                            <TextBox Name="CheckOutPath" DockPanel.Dock="Left" Margin="10 0" VerticalAlignment="Center" FontSize="14" FontWeight="Bold"></TextBox>
+                        </DockPanel>
+                        <DockPanel Grid.Row="4">
+                            <Button HorizontalAlignment="Center" Click="check_out_click" >CheckOut</Button>
+                        </DockPanel>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Name="Browse" Header="Browse">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="61*"/>
+                        <ColumnDefinition Width="21*"/>
+                        <ColumnDefinition Width="431*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <!-- dirs -->
+                        <RowDefinition Height="5"></RowDefinition>
+                        <!-- gridsplitter-->
+                        <RowDefinition Height="*"></RowDefinition>
+                        <!-- files -->
+                        <RowDefinition Height="10"></RowDefinition>
+                        <RowDefinition Height="20"></RowDefinition>
+                        <RowDefinition Height="10"></RowDefinition>
+                        <RowDefinition Height="100"></RowDefinition>
+
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Background="#ccc" Grid.ColumnSpan="3" Margin="0,0,-0.333,0.333">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <!-- label -->
+                            <RowDefinition Height="30"></RowDefinition>
+                            <!-- textblock -->
+                            <RowDefinition Height="*"></RowDefinition>
+                            <!-- dir list -->
+                            <RowDefinition Height="10"></RowDefinition>
+                            <!-- buttons -->
+                        </Grid.RowDefinitions>
+                        <DockPanel Grid.Row="0">
+                            <TextBlock DockPanel.Dock="Left" Margin="10 0" VerticalAlignment="Center" FontSize="14" FontWeight="Bold">Dirs</TextBlock>
+                        </DockPanel>
+                        <DockPanel Grid.Row="1">
+                            <Label Width="40" Height="30" Margin="10 0 5 0" DockPanel.Dock="Right">Path</Label>
+                            <TextBlock x:Name="pathTextBlock" DockPanel.Dock="Left" Padding="10 0" Margin="12 0" VerticalAlignment="Center" FontSize="14" FontWeight="Normal" Background="#fff">path</TextBlock>
+                        </DockPanel>
+                        <Border Grid.Row="2" BorderThickness="10" Background="#000">
+                            <ListBox x:Name="directoriesList" MouseDoubleClick="dirList_MouseDoubleClick"></ListBox>
+                        </Border>
+                    </Grid>
+                    <GridSplitter Grid.Row="1" Grid.ColumnSpan="3" Height="5" HorizontalAlignment="Stretch" Background="#666" Margin="0,0.667,-0.333,199" Grid.RowSpan="2"></GridSplitter>
+                    <Grid Grid.Row="2" Background="#ccc" Grid.ColumnSpan="3" Margin="0,0.333,-0.333,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <!-- label -->
+                            <RowDefinition Height="*"></RowDefinition>
+                            <!-- file list -->
+                            <RowDefinition Height="10"></RowDefinition>
+                            <!-- buttons -->
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Padding="10 10" FontWeight="Bold" FontSize="14">Files</TextBlock>
+                        <Border Grid.Row="1" BorderThickness="10" Background="#000">
+                            <ListBox x:Name="fileList" MouseDoubleClick="view_Content_of_file_Click"></ListBox>
+                        </Border>
+                    </Grid>
+                    <DockPanel Grid.Row="4" Grid.ColumnSpan="3" Margin="0,0,-0.333,0">
+                        <Button Name="viewMetaData" Click="view_Meta_Data" DockPanel.Dock="Right" Margin="10 0" Width="90">View Meta Data</Button>
+                        <TextBlock Name="metadata" DockPanel.Dock="Left">Click to View the Meta Data of the Selected File</TextBlock>
+                    </DockPanel>
+                    <FlowDocumentScrollViewer Grid.Row="6" BorderThickness="1" BorderBrush="Black" Grid.ColumnSpan="3" Margin="0,0,-0.333,0">
+                        <FlowDocument Name="metadataview" FontFamily="Consolas" FontSize="12">
+                            <Paragraph Name="main">
+
+                            </Paragraph>
+                        </FlowDocument>
+                    </FlowDocumentScrollViewer>
+                </Grid>
+            </TabItem>
+            <TabItem Name="Browse1" Header="Browse">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"></RowDefinition>
+                        <RowDefinition Height="20"></RowDefinition>
+                        <RowDefinition Height="10"></RowDefinition>
+                        <RowDefinition Height="20"></RowDefinition>
+                        <RowDefinition Height="10"></RowDefinition>
+                        <RowDefinition Height="20"></RowDefinition>
+                        <RowDefinition Height="10"></RowDefinition>
+                        <RowDefinition Height="20"></RowDefinition>
+                        <RowDefinition Height="10"></RowDefinition>
+                        <RowDefinition Height="120"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="1" IsEnabled="False"  Name="filedependencyversion">The files with entered name or having entered dependency, or with entered version will be displayed in the list box</TextBlock> 
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20"></ColumnDefinition>
+                            <ColumnDefinition Width="80"></ColumnDefinition>
+                            <ColumnDefinition Width="20"></ColumnDefinition>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                            <ColumnDefinition Width="20"></ColumnDefinition>
+                            <ColumnDefinition Width="80"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="1">Enter Filename</TextBlock>
+                        <TextBlock Grid.Column="3">Enter Dependency</TextBlock>
+                        <TextBlock Grid.Column="5">Enter version</TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20"></ColumnDefinition>
+                            <ColumnDefinition Width="80"></ColumnDefinition>
+                            <ColumnDefinition Width="20"></ColumnDefinition>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                            <ColumnDefinition Width="20"></ColumnDefinition>
+                            <ColumnDefinition Width="80"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="1" Name="EnteredFilenameIs" IsEnabled="True" BorderBrush="Black" ></TextBox>
+                        <TextBox Grid.Column="3" Name="EnteredDependencyFilenameIs" IsEnabled="True" BorderBrush="Black" ></TextBox>
+                        <TextBox Grid.Column="5" Name="EnteredVersionIs" IsEnabled="True" BorderBrush="Black" ></TextBox>
+                    </Grid>
+                    <Grid Grid.Row="7">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30"></ColumnDefinition>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
+                            <ColumnDefinition Width="60"></ColumnDefinition>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
+                            <ColumnDefinition Width="60"></ColumnDefinition>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="1" Width="50" Click="fetchForFilename">Fetch</Button>
+                        <Button Grid.Column="3" Click="fetchforDependency">Fetch</Button>
+                        <Button Grid.Column="5" Click="fetchforVersion">Fetch</Button>
+                    </Grid>
+                    <Grid Grid.Row="9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                            <ColumnDefinition Width="150"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <ListBox Grid.Column="1" Name="queryFiles" ></ListBox>
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl >
+        <StatusBar Grid.Row="1" Grid.ColumnSpan="3" Margin="0,0.333,0.333,-0.333">
+            <TextBlock Height="20"  Name="statusbar" Foreground="Red" FontStyle="Normal">Status will be updated here</TextBlock>
+        </StatusBar>
+    </Grid>
+</Window>
